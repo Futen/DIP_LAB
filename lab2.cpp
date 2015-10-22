@@ -164,5 +164,8 @@ void histEqualization(const Mat& input, Mat& output, Mat& T){
     }
     time_count = (double)getTickCount() - time_count;
     printf("histEqualization Total consume %gms\n", time_count*1000/getTickFrequency());
+    //imageHist(output, histVector);
+    //RecordHist("hist_equ.txt", histVector);
+    //cout<<histVector<<endl;
     return;
 }
