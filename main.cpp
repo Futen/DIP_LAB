@@ -28,6 +28,5 @@ int main(){
 
     histEqualization(input, output, v);
     imwrite("outequ.tif",output);
-////////////////
 	return 0;
 }
