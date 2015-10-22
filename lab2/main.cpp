@@ -34,7 +34,7 @@ int main(){
     namedWindow("TEST");
     imshow("TEST", output);
     waitKey(0);
-//
+//////
     return 0;
 }
 
