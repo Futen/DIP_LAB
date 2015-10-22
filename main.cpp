@@ -25,9 +25,9 @@ int main(){
     powerlawTransform(input, 0.4, output);
     output.convertTo(output, CV_8UC(1), 255.0);
     imwrite("out4.tif",output);
-    /*
+    
     histEqualization(input, output, v);
     imwrite("outequ.tif",output);
-    */
+    
 	return 0;
 }
