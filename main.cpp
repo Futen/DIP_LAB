@@ -28,6 +28,10 @@ int main(){
 
     histEqualization(input, output, v);
     imwrite("outequ.tif",output);
+    namedWindow("TEST");
+    imshow("TEST", output);
+    waitKey(0);
+
 //
     return 0;
 }
