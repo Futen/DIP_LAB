@@ -114,9 +114,11 @@ void imageHist(const Mat& input, Mat& histVector){
         //cout<<tmp<<endl;
         hist_data[tmp]++;
     }
+    /*
     for(int i=0; i<256; i++){
         hist_data[i] /= inputSize.width * inputSize.height;
     }
+    */
     return;
 }
 void histEqualization(const Mat& input, Mat& output, Mat& T){
@@ -151,8 +153,10 @@ void histEqualization(const Mat& input, Mat& output, Mat& T){
     hist_data = (float*)histVector.data;
 
     float accum = 0;
+    int height = inputSize.height;
+    int width = inputSize.width;
     for(int i=0; i<256; i++){
-       T_data[i] = (unsigned char)(255 * (accum + hist_data[i]) + 0.5);
+       T_data[i] = (unsigned char)((255.0/(height*width))* (accum + hist_data[i]) + 0.5);
        accum += hist_data[i];
     }
     for(int i=0; i<inputSize.width*inputSize.height; i++){
