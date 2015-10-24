@@ -15,4 +15,5 @@ void logTransform(const Mat& input, Mat &output);
 void powerlawTransform(const Mat& input, float r, Mat& output);
 void imageHist(const Mat& input, Mat& histVector);
 void histEqualization(const Mat& input, Mat& output, Mat& T);
+
 #endif
