@@ -268,13 +268,11 @@ void laplacianFiltering(const Mat& input, const Mat& laplacianMask, float scale,
     for(int p=0; p<inputSize.width*inputSize.height; p++){
         float buf;
         scaleLap_data[p] = scaleLap_data[p]*scale;
-        buf = input_data[p] + scaleLap_data[p];
-        
+        buf = input_data[p] + scaleLap_data[p];        
         if(buf>1)
             buf = 1;
         else if(buf<0)
             buf = 0;
-        
         output_data[p] = buf;
     }
     t = (double)getTickCount()-t;
