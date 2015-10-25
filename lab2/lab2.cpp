@@ -265,7 +265,7 @@ void laplacianFiltering(const Mat& input, const Mat& laplacianMask, float scale,
     scaleLap_data = (float*)scaledLaplacian.data;
     input_data = (float*)input_tmp.data;
     output_data = (float*)output.data;
-    for(int p; p<inputSize.width*inputSize.height; p++){
+    for(int p=0; p<inputSize.width*inputSize.height; p++){
         float buf;
         scaleLap_data[p] = scaleLap_data[p]*scale;
         buf = input_data[p] + scaleLap_data[p];
