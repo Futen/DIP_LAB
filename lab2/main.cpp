@@ -8,19 +8,6 @@ int main(){
     float* data;
 //   spatialFiltering(input, mask, tmp);
     mask = Mat(3,3,CV_32FC(1),b);
-    /*////
-    mask.create(3,3,CV_32FC(1));
-    data = (float*)mask.data;
-    data[0]=0;
-    data[1]=1;
-    data[2]=0;
-    data[3]=1;
-    data[4]=-4;
-    data[5]=1;
-    data[6]=0;
-    data[7]=1;
-    data[8]=0;
-    */
 //    cout<<(float)mask.data[0]<<endl;
     //cout<<mask.size()<<endl;
 //    spatialFiltering(input, mask, output);
