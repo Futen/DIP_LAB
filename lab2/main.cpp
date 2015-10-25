@@ -2,57 +2,21 @@
 
 int main(){
     Mat input = imread("Fig0338(a)(blurry_moon).tif",CV_LOAD_IMAGE_UNCHANGED);
-//    float a[3][3] = {{0.0625, 0.125, 0.0625}, {0.125, 0.25, 0.125}, {0.0625, 0.125, 0.0625}};
+    float a[5][5] = {{1,4,7,4,1},{4,16,26,16,4},{7,26,41,26,7},{4,16,26,16,4},{1,4,7,4,1}};
     float b[3][3] = {{0, -1, 0}, {-1, 4, -1}, {0, -1, 0}};
     Mat output,v,mask,tmp;
     float* data;
-//   spatialFiltering(input, mask, tmp);
+    imageHist(input, v);
+    RecordHist("hist.txt", v);
     mask = Mat(3,3,CV_32FC(1),b);
-///    cout<<(float)mask.data[0]<<endl;
-    //cout<<mask.size()<<endl;
+//    mask.convertTo(mask, CV_32FC(1), 1/273.0);
 //    spatialFiltering(input, mask, output);
     laplacianFiltering(input, mask, 7, output, v);
-//    cout<<output<<endl;
-//    logTransform(input,output);
     output.convertTo(output, CV_8UC(1), 255.0);
     namedWindow("TEST");
     imshow("TEST", output);
     waitKey(0);
-//    imwrite("out.tif",output);
-    //imageHist(input, output);
-    //logTransform(input, output);
-    //powerlawTransform(input, 0.3, output);
-    //histEqualization(input, output,v);
-    //input = Mat::zeros(1,256,CV_32FC(1));
-/*
-    namedWindow("TEST");
-    imshow("TEST", input);
-    waitKey(0);
-*/
-    //input.convertTo(input, CV_32FC(1), 1/255.0);
-/*
-    logTransform(input, output);
-    output.convertTo(output, CV_8UC(1), 255.0);
-    imwrite("outlog.tif",output);
-
-    powerlawTransform(input, 0.3, output);
-    output.convertTo(output, CV_8UC(1), 255.0);
-    imwrite("out3.tif",output);
-
-    powerlawTransform(input, 0.4, output);
-    output.convertTo(output, CV_8UC(1), 255.0);
-    imwrite("out4.tif",output);
-  
-    imageHist(input, v);
-    RecordHist("hist_ori.txt", v);
-
-    histEqualization(input, output, v);
-    imwrite("outequ.tif",output);
-    namedWindow("TEST");
-    imshow("TEST", output);
-    waitKey(0);
-///
-*/
+    imwrite("out.tif",output);
     return 0;
 }
 

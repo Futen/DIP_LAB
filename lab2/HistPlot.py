@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 x = np.arange(0,256)
 y = np.zeros(256)
-f = open("hist_ori.txt",'r')
+f = open("hist.txt",'r')
 index = 0
 for line in f:
     line = line.split("\n")[0]
@@ -19,6 +19,7 @@ plt.xlabel("intensity")
 plt.ylabel("times")
 plt.title("Histogram")
 plt.show()
+'''
 f = open("hist_equ.txt",'r')
 index = 0
 for line in f:
@@ -33,3 +34,4 @@ plt.xlabel("intensity")
 plt.ylabel("times")
 plt.title("Histogram")
 plt.show()
+'''
