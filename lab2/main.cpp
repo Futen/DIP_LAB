@@ -8,7 +8,7 @@ int main(){
     float* data;
 //   spatialFiltering(input, mask, tmp);
     mask = Mat(3,3,CV_32FC(1),b);
-//    cout<<(float)mask.data[0]<<endl;
+///    cout<<(float)mask.data[0]<<endl;
     //cout<<mask.size()<<endl;
 //    spatialFiltering(input, mask, output);
     laplacianFiltering(input, mask, 8, output, v);
