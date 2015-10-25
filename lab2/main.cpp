@@ -11,7 +11,7 @@ int main(){
 ///    cout<<(float)mask.data[0]<<endl;
     //cout<<mask.size()<<endl;
 //    spatialFiltering(input, mask, output);
-    laplacianFiltering(input, mask, 3, output, v);
+    laplacianFiltering(input, mask, 7, output, v);
 //    cout<<output<<endl;
 //    logTransform(input,output);
     output.convertTo(output, CV_8UC(1), 255.0);
