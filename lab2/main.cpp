@@ -10,7 +10,7 @@ int main(){
 //    mask = Mat(3,3,CV_32FC(1),a);
 //   spatialFiltering(input, mask, tmp);
     mask = Mat(3,3,CV_32FC(1),b);
-    /*
+    /*////
     mask.create(3,3,CV_32FC(1));
     data = (float*)mask.data;
     data[0]=0;
