@@ -3,15 +3,16 @@
 int main(){
     Mat input = imread("Fig0338(a)(blurry_moon).tif",CV_LOAD_IMAGE_UNCHANGED);
     float a[5][5] = {{1,4,7,4,1},{4,16,26,16,4},{7,26,41,26,7},{4,16,26,16,4},{1,4,7,4,1}};
-    float b[3][3] = {{0, -1, 0}, {-1, 4, -1}, {0, -1, 0}};
+    float b[3][3] = {{0.11, 0.11, 0.11}, {0.11, 0.11, 0.11}, {0.11, 0.11, 0.11}};
     Mat output,v,mask,tmp;
     float* data;
-    imageHist(input, v);
-    RecordHist("hist.txt", v);
+//    imageHist(input, v);
+//    RecordHist("hist.txt", v);
     mask = Mat(3,3,CV_32FC(1),b);
 //    mask.convertTo(mask, CV_32FC(1), 1/273.0);
 //    spatialFiltering(input, mask, output);
-    laplacianFiltering(input, mask, 7, output, v);
+//    laplacianFiltering(input, mask, 7, output, v);
+    unsharpFiltering(input, mask, 4.5, output, v, tmp);
     output.convertTo(output, CV_8UC(1), 255.0);
     namedWindow("TEST");
     imshow("TEST", output);
