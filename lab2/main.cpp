@@ -1,7 +1,7 @@
 #include "lab2.h"
 
 int main(){
-    Mat input = imread("Fig0338(a)(blurry_moon).tif",CV_LOAD_IMAGE_UNCHANGED);
+    Mat input = imread("Fig0340(a)(dipxe_text).tif",CV_LOAD_IMAGE_UNCHANGED);
     float a[5][5] = {{1,4,7,4,1},{4,16,26,16,4},{7,26,41,26,7},{4,16,26,16,4},{1,4,7,4,1}};
     float b[3][3] = {{0.11, 0.11, 0.11}, {0.11, 0.11, 0.11}, {0.11, 0.11, 0.11}};
     Mat output,v,mask,tmp;
