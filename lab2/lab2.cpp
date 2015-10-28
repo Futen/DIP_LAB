@@ -42,15 +42,15 @@ void logTransform(const Mat& input, Mat &output){
         if(data[index] > max_val)
             max_val = data[index];
 
-    C = 255.0/log(1+max_val); // calculate the C value
+    C = 255.0/(log(1+max_val)); // calculate the C value
     tmp_output.create(size_of_input.height, size_of_input.width, CV_8UC(1));
     unsigned char* out_data = tmp_output.data;
     // Do log operation to every point
     for(int index=0; index < size_of_input.height * size_of_input.width; index++){
-        out_data[index] = (unsigned char)(C * log(1 + data[index])+0.5);
+        out_data[index] = (unsigned char)(C * log(1.0 + data[index]) + 0.5);
     }
     t = (double)getTickCount() - t;
-    printf("logTransform Total consume %gms\n", t*1000/getTickFrequency());
+    printf("logTransform Total consume %gms\n", t*1000/getTickFrequency());// get processing time
     tmp_output.convertTo(output, CV_32FC1, 1/255.0); // write output data
 
     return;
@@ -93,7 +93,7 @@ void powerlawTransform(const Mat& input, float r, Mat& output){
         output_data[index] = (unsigned char)(C * pow((double)input_data[index], (double)r)+0.5);
     }
     t = (double)getTickCount() - t;
-    printf("powerlawTransform Total consume %gms\n", t*1000/getTickFrequency());
+    printf("powerlawTransform Total consume %gms\n", t*1000/getTickFrequency());// get processing time
     tmp_output.convertTo(output, CV_32FC1, 1/255.0); //write output data
     return;
 }
@@ -172,7 +172,7 @@ void histEqualization(const Mat& input, Mat& output, Mat& T){
         output_data[i] = T_data[(int)input_data[i]];
     }
     time_count = (double)getTickCount() - time_count;
-    printf("histEqualization Total consume %gms\n", time_count*1000/getTickFrequency());
+    printf("histEqualization Total consume %gms\n", time_count*1000/getTickFrequency());// get processing time
     return;
 }
 void spatialFiltering(const Mat& input, const Mat& mask, Mat& output){
@@ -228,8 +228,9 @@ void spatialFiltering(const Mat& input, const Mat& mask, Mat& output){
     //start doing mask operation from (0,0)
     for(int row=0; row<inputSize.height; row++){
         for(int col=0; col<inputSize.width; col++){
-            mask_index = 0;
+            mask_index = maskSize.width*maskSize.height - 1 ; //set start mask index
             sum = 0;
+            // convolution
             for(int k_row=row-back; k_row<=row+back; k_row++){
                 for(int k_col=col-back; k_col<=col+back; k_col++){
                     float buf;
@@ -240,7 +241,7 @@ void spatialFiltering(const Mat& input, const Mat& mask, Mat& output){
                     else{
                         buf = 0;
                     }
-                    mask_index++;
+                    mask_index--;
                     sum+=buf; // get the value of the pix should be
                 }
             } 
@@ -285,7 +286,7 @@ void laplacianFiltering(const Mat& input, const Mat& laplacianMask, float scale,
         output_data[p] = buf;
     }
     t = (double)getTickCount()-t;
-    printf("Laplacian total consume %gms\n", t*1000/getTickFrequency());
+    printf("Laplacian total consume %gms\n", t*1000/getTickFrequency());// get processing time
     return;
 }
 void unsharpFiltering(const Mat& input, const Mat& boxMask, float scale, Mat& output, Mat& scaledUnsharp, Mat& blurredInput){
@@ -296,6 +297,7 @@ void unsharpFiltering(const Mat& input, const Mat& boxMask, float scale, Mat& ou
     float* output_data;
     Size inputSize;
     double t = (double)getTickCount();
+    // To check the input data type is float or uchar
     if(input.type() == CV_8UC(1)){
         input.convertTo(input_tmp, CV_32FC(1), 1/255.0);
     }
@@ -306,6 +308,7 @@ void unsharpFiltering(const Mat& input, const Mat& boxMask, float scale, Mat& ou
         printf("Error Type in unsharpFiltering!!!\n");
         exit(0);
     }
+    // blur the input
     spatialFiltering(input_tmp, boxMask, blurredInput);
     inputSize = input.size();
     output.create(inputSize, CV_32FC(1));
@@ -314,18 +317,18 @@ void unsharpFiltering(const Mat& input, const Mat& boxMask, float scale, Mat& ou
     blur_data = (float*)blurredInput.data;
     output_data = (float*)output.data;
     scaled_data = (float*)scaledUnsharp.data;
-
+    // start doing unsharp
     for(int i=0; i<inputSize.width*inputSize.height; i++){
         float buf;
-        scaled_data[i] = scale * (input_data[i] - blur_data[i]);
+        scaled_data[i] = scale * (input_data[i] - blur_data[i]);// get scaledUnsharp
         buf = input_data[i] + scaled_data[i];
-        if(buf > 255)
+        if(buf > 255) // pix > 255
             buf = 255;
-        else if(buf < 0)
+        else if(buf < 0)// pix < 0
             buf = 0;
-        output_data[i] = buf;
+        output_data[i] = buf; //write output data
     }
     t = ((double)getTickCount() - t)*1000/getTickFrequency();
-    printf("Total consume %gms\n", t);
+    printf("Total consume %gms\n", t);// get the processing time
     return;
 }

@@ -1,18 +1,20 @@
 #include "lab2.h"
 
 int main(){
-    Mat input = imread("Fig0340(a)(dipxe_text).tif",CV_LOAD_IMAGE_UNCHANGED);
+    Mat input = imread("Fig0308(a)(fractured_spine).tif",CV_LOAD_IMAGE_UNCHANGED);
     float a[5][5] = {{1,4,7,4,1},{4,16,26,16,4},{7,26,41,26,7},{4,16,26,16,4},{1,4,7,4,1}};
     float b[3][3] = {{0.11, 0.11, 0.11}, {0.11, 0.11, 0.11}, {0.11, 0.11, 0.11}};
     Mat output,v,mask,tmp;
-    float* data;
+    float *data,*data2;
 //    imageHist(input, v);
 //    RecordHist("hist.txt", v);
     mask = Mat(3,3,CV_32FC(1),b);
 //    mask.convertTo(mask, CV_32FC(1), 1/273.0);
 //    spatialFiltering(input, mask, output);
 //    laplacianFiltering(input, mask, 7, output, v);
-    unsharpFiltering(input, mask, 4.5, output, v, tmp);
+//    logTransform(input, output);
+    powerlawTransform(input, 0.4, output);
+    //unsharpFiltering(input, mask, 4.5, output, v, tmp);
     output.convertTo(output, CV_8UC(1), 255.0);
     namedWindow("TEST");
     imshow("TEST", output);
