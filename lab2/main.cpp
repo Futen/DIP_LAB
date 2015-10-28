@@ -20,6 +20,7 @@ int main(){
     imshow("TEST", output);
     waitKey(0);
     imwrite("out.tif",output);
+
     return 0;
 }
 
