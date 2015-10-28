@@ -10,8 +10,9 @@
 using namespace std;
 using namespace cv;
 
+void RecordHist_F(const char* file_name, const Mat& histVector);
+void RecordHist_CH(const char* file_name, const Mat& histVector);
 //2-1
-void RecordHist(const char* file_name, const Mat& histVector);
 void logTransform(const Mat& input, Mat &output);
 void powerlawTransform(const Mat& input, float r, Mat& output);
 //2-2

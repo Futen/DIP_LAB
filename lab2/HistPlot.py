@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 x = np.arange(0,256)
 y = np.zeros(256)
-f = open("hist.txt",'r')
+f = open("T_hist.txt",'r')
 index = 0
 for line in f:
     line = line.split("\n")[0]
@@ -16,7 +16,7 @@ f.close()
 #print y
 plt.plot(x,y)
 plt.xlabel("intensity")
-plt.ylabel("times")
+plt.ylabel("map to")
 plt.title("Histogram")
 plt.show()
 '''
