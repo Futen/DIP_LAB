@@ -9,6 +9,7 @@ int main(){
 //    imageHist(input, v);
 //    RecordHist("hist.txt", v);
     mask = Mat(3,3,CV_32FC(1),b);
+    
     histEqualization(input, output, T);
     RecordHist_CH("T_hist.txt", T);
     namedWindow("TEST");
@@ -23,7 +24,8 @@ int main(){
     imshow("TEST", output);
     waitKey(0);
     imwrite("log_out.tif",output);
-
+*/
+/*
     powerlawTransform(input, 0.8, output);
     output.convertTo(output, CV_8UC(1), 255.0);
     namedWindow("TEST");
