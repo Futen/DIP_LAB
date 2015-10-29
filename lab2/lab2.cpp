@@ -329,6 +329,6 @@ void unsharpFiltering(const Mat& input, const Mat& boxMask, float scale, Mat& ou
         output_data[i] = buf; //write output data
     }
     t = ((double)getTickCount() - t)*1000/getTickFrequency();
-    printf("Total consume %gms\n", t);// get the processing time
+    printf("unsharpFiltering total consume %gms\n", t);// get the processing time
     return;
 }
