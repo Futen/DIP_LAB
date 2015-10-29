@@ -1,15 +1,30 @@
 #include "lab2.h"
 
-int main(){
-    Mat input = imread("Fig0308(a)(fractured_spine).tif",CV_LOAD_IMAGE_UNCHANGED);
+int main(int argc, char* argv[]){
+    Mat input = imread("Fig0340(a)(dipxe_text).tif",CV_LOAD_IMAGE_UNCHANGED);
     float a[5][5] = {{1,4,7,4,1},{4,16,26,16,4},{7,26,41,26,7},{4,16,26,16,4},{1,4,7,4,1}};
-    float b[3][3] = {{0.11, 0.11, 0.11}, {0.11, 0.11, 0.11}, {0.11, 0.11, 0.11}};
-    Mat mask, output,T;
-    float *data,*data2;
+//    float b[3][3] = {{1, 2, 1}, {2, 4, 2}, {1, 2, 1}};
+    Mat mask, output,scaledUnsharp,blurredInput,T;
 //    imageHist(input, v);
 //    RecordHist("hist.txt", v);
-    mask = Mat(3,3,CV_32FC(1),b);
-    
+    mask = Mat(5,5,CV_32FC(1),a);
+    mask/=273;
+    //mask = mask/273;
+    cout<<mask<<endl;
+    unsharpFiltering(input, mask, atoi(argv[1]), output, scaledUnsharp, blurredInput);
+    output.convertTo(output, CV_8UC(1), 255.0);
+    //scaledUnsharp += 0.5;
+    scaledUnsharp.convertTo(scaledUnsharp, CV_8UC(1), 255.0);
+    blurredInput.convertTo(blurredInput, CV_8UC(1), 255.0);
+    imwrite("un_out.tif", output);
+
+
+    laplacianFiltering(input, mask, -1, output, scaledUnsharp);
+    output.convertTo(output, CV_8UC(1), 255.0);
+    scaledUnsharp.convertTo(scaledUnsharp,CV_8UC(1), 255.0);
+    imwrite("scale_lap.tif", output);
+
+
     histEqualization(input, output, T);
     RecordHist_CH("T_hist.txt", T);
     namedWindow("TEST");
@@ -17,15 +32,13 @@ int main(){
     waitKey(0);
     imwrite("equ_out.tif",output);
 
-/*
     logTransform(input, output);
     output.convertTo(output, CV_8UC(1), 255.0);
     namedWindow("TEST");
     imshow("TEST", output);
     waitKey(0);
     imwrite("log_out.tif",output);
-*/
-/*
+
     powerlawTransform(input, 0.8, output);
     output.convertTo(output, CV_8UC(1), 255.0);
     namedWindow("TEST");
@@ -60,7 +73,7 @@ int main(){
     imshow("TEST", output);
     waitKey(0);
     imwrite("power_out01.tif",output);
-*/
+
     return 0;
 }
 
