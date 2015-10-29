@@ -42,7 +42,7 @@ void logTransform(const Mat& input, Mat &output){
         if(data[index] > max_val)
             max_val = data[index];
 
-    C = 255.0/(log(1+max_val)); // calculate the C value
+    C = 255.0/(log(1.0+max_val)); // calculate the C value
     tmp_output.create(size_of_input.height, size_of_input.width, CV_8UC(1));
     unsigned char* out_data = tmp_output.data;
     // Do log operation to every point
