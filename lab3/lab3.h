@@ -1,3 +1,5 @@
+#ifndef lab3
+#define lab3
 #include <stdio.h>
 #include <stdlib.h>
 #include <cstdlib>
@@ -12,8 +14,9 @@ using namespace cv;
 void myDFT2(Mat& input, Mat& output);
 void myIDFT2(Mat& input, Mat& output);
 void myFFT2(Mat& input, Mat& output);
-void myIFFT2(Mat& input, May& output);
+void myIFFT2(Mat& input, Mat& output);
 //4-3
 void myGLPF(float D0, int M, int N, Mat& output);
 //4-4
 void myGHPF(float D0, int M, int N, Mat& output);
+#endif
