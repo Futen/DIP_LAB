@@ -1,7 +1,7 @@
 function[output] = myDFT2(image)
     tic;
     imageSize = size(image); % get input image size
-    width = imageSize(2);
+    width = imageSize(2); % get image size
     height = imageSize(1);
     for row = 1:height
         for col = 1:width

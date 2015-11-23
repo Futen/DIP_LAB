@@ -2,7 +2,7 @@ function[output] = myIDFT2(input)
     tic;
     image = conj(input);
     imageSize = size(input); % get input image size
-    width = imageSize(2);
+    width = imageSize(2); % get image size
     height = imageSize(1);
 
     row_linspace = (1:height);
