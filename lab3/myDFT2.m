@@ -14,10 +14,10 @@ function[output] = myDFT2(image)
     output = zeros([height, width]);
     % do some calculation for speed up program
     for row = 1:height
-        row_exp_space(row,:) = exp(complex(0,-1)*(row_exp_vector*row));
+        row_exp_space(row,:) = exp(complex(0,-1)*(row_exp_vector*(row-1)));
     end
     for col = 1:width
-        col_exp_space(col,:) = exp(complex(0,-1)*(col_exp_vector*col));
+        col_exp_space(col,:) = exp(complex(0,-1)*(col_exp_vector*(col-1)));
     end
     output = row_exp_space * image * col_exp_space'; % the product of the matrix will be output
     toc;
