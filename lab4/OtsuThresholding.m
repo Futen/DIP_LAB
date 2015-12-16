@@ -37,4 +37,5 @@ function[output_binary, optimumT] = OtsuThresholding(input_uint8)
     tmp = find(delta_b==max_val);
     optimumT = round(mean(tmp) - 1)
     output_binary = input_uint8 > uint8(optimumT);
+
 end
