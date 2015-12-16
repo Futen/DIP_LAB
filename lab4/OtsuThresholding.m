@@ -33,9 +33,10 @@ function[output_binary, optimumT] = OtsuThresholding(input_uint8)
         end
     end
     delta_b = P1.*P2.*(m1-m2).^2;
+    mean_g = sum((0:255).*histo_prob);
+    sep = (delta_b.^2)/(mean_g)^2;
     max_val = max(delta_b);
     tmp = find(delta_b==max_val);
-    optimumT = round(mean(tmp) - 1)
+    optimumT = round(mean(tmp) - 1);
     output_binary = input_uint8 > uint8(optimumT);
-
 end
